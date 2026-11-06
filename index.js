@@ -7,7 +7,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start((ctx) => {
-    ctx.reply('Welcome to Tiny Tales TV Bot! 🎬\nSend me a short story or text, and I will generate your video and voiceover.');
+    ctx.reply('Welcome to Tiny Tales TV Bot! 🎬\nSend me a story, and I will generate your video and voiceover.');
 });
 
 bot.on('text', async (ctx) => {
@@ -27,10 +27,9 @@ bot.on('text', async (ctx) => {
                 return ctx.reply('❌ Error generating voiceover.');
             }
 
-            // Step 2: Generate Video using ffmpeg (Combining Audio + Solid Background)
+            // Step 2: Generate Video using ffmpeg (Combining Audio + Background)
             ffmpeg()
-                // Creating a simple colored background or you can use an image
-                .input('color=c=blue:s=1280x720:r=30')
+                .input('color=c=lightblue:s=1280x720:r=30')
                 .inputFormat('lavfi')
                 .input(audioPath)
                 .outputOptions([
@@ -64,7 +63,7 @@ bot.on('text', async (ctx) => {
 });
 
 bot.launch();
-console.log('Tiny Tales Video Bot is running with Video & gTTS support...');
+console.log('Tiny Tales Video Bot is running...');
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
