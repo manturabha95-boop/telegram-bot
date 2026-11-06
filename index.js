@@ -1,7 +1,12 @@
-Done! Congratulations on your new bot. You will find it at t.me/TinyTalesVideoMaker2026Bot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+const { Telegraf } = require('telegraf');
 
-Use this token to access the HTTP API:
-9121843304:AAFGs7qEOsm5AzKqt7U_Lnez5wTqsnhTqbs
-Keep your token secure and store it safely, it can be used by anyone to control your bot.
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
-For a description of the Bot API, see this page: https://core.telegram.org/bots/api
+bot.start((ctx) => ctx.reply('Welcome! Tiny Tales Video Maker Bot is online.'));
+bot.help((ctx) => ctx.reply('Send /start to begin.'));
+
+bot.launch();
+console.log('Bot is running...');
+
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
